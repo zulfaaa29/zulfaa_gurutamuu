@@ -1,20 +1,20 @@
 :root {
-  --bg-900: #021a2a;
-  --bg-800: #06273d;
-  --bg-700: #0d3a54;
-  --bg-600: #114e6d;
-  --panel: rgba(10, 32, 46, 0.78);
-  --panel-strong: rgba(15, 39, 55, 0.9);
-  --card: rgba(18, 53, 72, 0.92);
-  --card-soft: rgba(26, 69, 90, 0.72);
-  --line: rgba(173, 215, 236, 0.18);
-  --primary: #7fe8e7;
-  --primary-strong: #4adfd7;
-  --secondary: #9ad7ff;
-  --text: #edfaff;
-  --muted: #bddae3;
-  --muted-strong: #8db3c3;
-  --shadow: 0 30px 60px rgba(2, 11, 20, 0.45);
+  --bg-900: #fff7fb;
+  --bg-800: #fff0f6;
+  --bg-700: #ffe4ef;
+  --bg-600: #ffd3e3;
+  --panel: rgba(255, 255, 255, 0.82);
+  --panel-strong: rgba(255, 255, 255, 0.94);
+  --card: rgba(255, 255, 255, 0.92);
+  --card-soft: rgba(255, 226, 238, 0.78);
+  --line: rgba(190, 86, 126, 0.2);
+  --primary: #d94d84;
+  --primary-strong: #bd3269;
+  --secondary: #9b3d70;
+  --text: #4c2036;
+  --muted: #8a536c;
+  --muted-strong: #765066;
+  --shadow: 0 30px 60px rgba(166, 69, 108, 0.18);
 }
 
 * {
@@ -27,12 +27,19 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", sans-serif;
+  font-family: "DM Sans", sans-serif;
   background:
-    radial-gradient(circle at top left, rgba(123, 228, 255, 0.18), transparent 25%),
-    radial-gradient(circle at bottom right, rgba(76, 191, 222, 0.18), transparent 30%),
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.95), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(245, 157, 193, 0.28), transparent 34%),
     linear-gradient(180deg, var(--bg-900) 0%, var(--bg-800) 36%, var(--bg-700) 100%);
   color: var(--text);
+}
+
+h1,
+h2,
+h3,
+.brand-copy strong {
+  font-family: "Playfair Display", serif;
 }
 
 img {
@@ -53,7 +60,49 @@ select {
 }
 
 .page-shell {
+  position: relative;
   min-height: 100vh;
+  overflow: hidden;
+}
+
+.page-shell::before {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: min(47vw, 650px);
+  height: 100vh;
+  pointer-events: none;
+  background: url("bunga lily.png") right top / auto 142% no-repeat;
+  opacity: 0.24;
+  mix-blend-mode: multiply;
+  filter: saturate(0.92) contrast(0.96);
+  animation: background-bloom 9s ease-in-out infinite;
+}
+
+.page-shell::after {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  top: 14vh;
+  left: 0;
+  width: min(31vw, 430px);
+  height: 78vh;
+  pointer-events: none;
+  background: url("bunga lily.png") left top / auto 132% no-repeat;
+  opacity: 0.11;
+  mix-blend-mode: multiply;
+  filter: saturate(0.88) contrast(0.94);
+  transform: scaleX(-1);
+  animation: background-bloom-left 11s ease-in-out infinite;
+}
+
+.topbar,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 .container {
@@ -70,7 +119,7 @@ select {
   top: 0;
   z-index: 30;
   backdrop-filter: blur(18px);
-  background: rgba(4, 21, 31, 0.42);
+  background: rgba(255, 255, 255, 0.72);
   border-bottom: 1px solid var(--line);
 }
 
@@ -94,8 +143,8 @@ select {
   border-radius: 14px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(127, 232, 231, 0.3), rgba(154, 215, 255, 0.18));
-  border: 1px solid rgba(173, 215, 236, 0.25);
+  background: linear-gradient(135deg, #f7a7c8, #fff);
+  border: 1px solid rgba(190, 86, 126, 0.25);
   font-weight: 800;
   color: var(--primary);
 }
@@ -124,7 +173,7 @@ select {
   gap: 0.7rem;
   padding: 0.42rem;
   border-radius: 999px;
-  background: rgba(9, 29, 39, 0.8);
+  background: rgba(255, 255, 255, 0.78);
   border: 1px solid var(--line);
 }
 
@@ -138,8 +187,8 @@ select {
 
 .nav-pill:hover,
 .nav-pill.active {
-  background: linear-gradient(135deg, rgba(127, 232, 231, 0.16), rgba(154, 215, 255, 0.12));
-  border: 1px solid rgba(127, 232, 231, 0.22);
+  background: linear-gradient(135deg, rgba(247, 167, 200, 0.38), rgba(255, 255, 255, 0.75));
+  border: 1px solid rgba(217, 77, 132, 0.22);
   color: var(--text);
   box-shadow: 0 10px 25px rgba(88, 191, 220, 0.12);
 }
@@ -170,11 +219,67 @@ select {
   font-size: clamp(2.5rem, 5vw, 5rem);
   line-height: 0.96;
   letter-spacing: -0.05em;
+  animation: title-rise 0.9s ease both;
 }
 
 .hero-copy h1 span {
   display: block;
-  color: var(--secondary);
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #d94d84;
+  background: linear-gradient(110deg, #f7b6d0 0%, #d94d84 48%, #f5a9c8 100%);
+  background-size: 180% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation:
+    name-typing 3.2s steps(20, end) forwards,
+    title-glow 3.8s ease-in-out 3.2s infinite,
+    caret-blink 0.7s step-end infinite;
+}
+
+.hello-bubble {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  border-radius: 18px 18px 18px 5px;
+  background: linear-gradient(135deg, #d94d84, #c13e70);
+  color: #ffd8e8;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 24px rgba(166, 69, 108, 0.2);
+  animation: bubble-float 3.8s ease-in-out infinite;
+}
+
+.top-bubble {
+  margin: 0.7rem auto 0;
+}
+
+.hello-bubble::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  bottom: -0.55rem;
+  width: 1rem;
+  height: 1rem;
+  background: #c13e70;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.bubble-flower {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: 0 0 1.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  background: url("bunga lily.png") 72% 12% / 290% auto no-repeat;
+  box-shadow: 0 3px 8px rgba(92, 24, 54, 0.2);
 }
 
 .subtitle {
@@ -211,19 +316,36 @@ select {
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.button-flower {
+  position: relative;
+  width: 1.55rem;
+  height: 1.55rem;
+  margin-right: 0.55rem;
+  border-radius: 50%;
+  background: url("bunga lily.png") 72% 12% / 290% auto no-repeat;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 3px 8px rgba(166, 69, 108, 0.18);
+  transform: scale(0.9);
+  transition: transform 0.25s ease;
+}
+
+.button:hover .button-flower {
+  transform: scale(1) rotate(8deg);
+}
+
 .button:hover {
   transform: translateY(-2px);
 }
 
 .button.primary {
-  background: linear-gradient(135deg, var(--primary), var(--secondary));
-  color: #062b3b;
-  box-shadow: 0 18px 38px rgba(83, 201, 221, 0.28);
+  background: linear-gradient(135deg, var(--primary), #f29abd);
+  color: #fff;
+  box-shadow: 0 18px 38px rgba(217, 77, 132, 0.28);
 }
 
 .button.secondary {
-  border-color: rgba(173, 215, 236, 0.24);
-  background: rgba(18, 41, 54, 0.7);
+  border-color: rgba(190, 86, 126, 0.24);
+  background: rgba(255, 255, 255, 0.7);
   color: var(--text);
 }
 
@@ -239,7 +361,7 @@ select {
 .hero-stats li {
   padding: 1rem 1rem 0.9rem;
   border-radius: 20px;
-  background: rgba(12, 34, 47, 0.7);
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--line);
 }
 
@@ -263,6 +385,58 @@ select {
   min-height: 560px;
 }
 
+.lily-illustration {
+  position: absolute;
+  z-index: 0;
+  width: 92px;
+  height: 92px;
+  opacity: 0.9;
+  animation: lily-drift 5s ease-in-out infinite;
+}
+
+.lily-top {
+  top: 5%;
+  left: 2%;
+}
+
+.lily-bottom {
+  right: 1%;
+  bottom: 4%;
+  transform: scale(0.72) rotate(18deg);
+  animation-delay: -2.2s;
+}
+
+.lily-petal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 62px;
+  border: 1px solid rgba(217, 77, 132, 0.28);
+  border-radius: 70% 30% 65% 35%;
+  background: linear-gradient(145deg, #fff, #ffd6e6 72%, #f39abb);
+  transform-origin: 50% 100%;
+  box-shadow: inset 4px 0 8px rgba(255, 255, 255, 0.85);
+}
+
+.petal-one { transform: translate(-50%, -100%) rotate(0deg); }
+.petal-two { transform: translate(-50%, -100%) rotate(72deg); }
+.petal-three { transform: translate(-50%, -100%) rotate(144deg); }
+.petal-four { transform: translate(-50%, -100%) rotate(216deg); }
+.petal-five { transform: translate(-50%, -100%) rotate(288deg); }
+
+.lily-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #f5bd4f;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.48), 0 5px 12px rgba(166, 69, 108, 0.25);
+}
+
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -273,7 +447,7 @@ select {
 .orb-one {
   width: 360px;
   height: 360px;
-  background: radial-gradient(circle at center, rgba(80, 239, 224, 0.35), transparent 60%);
+  background: radial-gradient(circle at center, rgba(247, 167, 200, 0.42), transparent 60%);
   right: 10%;
   top: 14%;
 }
@@ -281,26 +455,59 @@ select {
 .orb-two {
   width: 290px;
   height: 290px;
-  background: radial-gradient(circle at center, rgba(131, 184, 255, 0.32), transparent 65%);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.9), transparent 65%);
   left: 8%;
   bottom: 11%;
 }
 
 .profile-card {
   position: relative;
+  overflow: hidden;
   z-index: 1;
   width: min(100%, 420px);
   padding: 1.2rem;
   border-radius: 30px;
-  background: linear-gradient(180deg, rgba(15, 33, 46, 0.92), rgba(12, 31, 42, 0.8));
-  border: 1px solid rgba(173, 215, 236, 0.2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 233, 242, 0.9));
+  border: 1px solid rgba(190, 86, 126, 0.2);
   box-shadow: var(--shadow);
 }
 
+.profile-card::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: -12%;
+  right: -8%;
+  width: 86%;
+  height: 92%;
+  pointer-events: none;
+  background: url("bunga lily.png") right top / cover no-repeat;
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+  transform: rotate(4deg);
+}
+
+.profile-card > * {
+  position: relative;
+  z-index: 1;
+}
+
 .avatar-wrap {
+  position: relative;
   display: flex;
   justify-content: center;
   padding: 2rem 1rem 1rem;
+}
+
+.avatar-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url("bunga lily.png") center 20% / cover no-repeat;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  border-radius: 24px;
 }
 
 .avatar-shell {
@@ -309,9 +516,10 @@ select {
   height: 220px;
   border-radius: 28px;
   overflow: hidden;
-  border: 1px solid rgba(173, 215, 236, 0.25);
-  background: linear-gradient(135deg, rgba(122, 199, 232, 0.2), rgba(255, 255, 255, 0.04));
-  box-shadow: 0 20px 35px rgba(5, 17, 28, 0.38);
+  border: 5px solid #fff;
+  background: linear-gradient(135deg, #f7a7c8, #fff);
+  box-shadow: 0 20px 35px rgba(166, 69, 108, 0.22);
+  animation: photo-bloom 6s ease-in-out infinite;
 }
 
 .avatar-image {
@@ -326,7 +534,7 @@ select {
   display: none;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(127, 232, 231, 0.28), rgba(154, 215, 255, 0.12));
+  background: linear-gradient(135deg, #f7a7c8, #fff);
   font-size: clamp(2.2rem, 5vw, 3.2rem);
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -359,6 +567,12 @@ select {
   margin: 0;
   font-size: clamp(1.6rem, 2vw, 2rem);
   line-height: 1.2;
+  background: linear-gradient(110deg, #f6b3ce, #c83e75, #f2a4c4);
+  background-size: 180% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: name-gradient 4.5s ease-in-out infinite;
 }
 
 .profile-info p {
@@ -371,7 +585,7 @@ select {
   z-index: 2;
   padding: 0.8rem 1rem;
   border-radius: 999px;
-  background: rgba(12, 34, 47, 0.8);
+  background: rgba(255, 255, 255, 0.86);
   border: 1px solid var(--line);
   color: var(--text);
   font-weight: 600;
@@ -411,7 +625,7 @@ select {
 .skill-card,
 .project-card,
 .contact-card {
-  background: rgba(10, 30, 41, 0.8);
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--line);
   border-radius: 26px;
   box-shadow: 0 18px 34px rgba(2, 12, 18, 0.24);
@@ -498,8 +712,8 @@ select {
 .pill-group span {
   padding: 0.6rem 0.9rem;
   border-radius: 999px;
-  background: rgba(127, 232, 231, 0.08);
-  border: 1px solid rgba(127, 232, 231, 0.18);
+  background: rgba(217, 77, 132, 0.08);
+  border: 1px solid rgba(217, 77, 132, 0.18);
   color: var(--text);
   font-size: 0.8rem;
   font-weight: 600;
@@ -520,8 +734,8 @@ select {
   align-items: center;
   padding: 0.45rem 0.7rem;
   border-radius: 999px;
-  background: rgba(154, 215, 255, 0.08);
-  border: 1px solid rgba(154, 215, 255, 0.18);
+  background: rgba(217, 77, 132, 0.08);
+  border: 1px solid rgba(217, 77, 132, 0.18);
   color: var(--secondary);
   font-size: 0.7rem;
   letter-spacing: 0.08em;
@@ -573,7 +787,7 @@ select {
 
 .site-footer {
   border-top: 1px solid var(--line);
-  background: rgba(6, 19, 29, 0.56);
+  background: rgba(255, 255, 255, 0.58);
 }
 
 .footer-wrap {
@@ -596,6 +810,56 @@ select {
   transform: translateY(0);
 }
 
+@keyframes title-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes title-glow {
+  0%, 100% { background-position: 0% center; text-shadow: 0 0 0 rgba(217, 77, 132, 0); }
+  50% { background-position: 100% center; text-shadow: 0 8px 24px rgba(217, 77, 132, 0.2); }
+}
+
+@keyframes name-typing {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+
+@keyframes caret-blink {
+  0%, 45% { border-color: #d94d84; }
+  46%, 100% { border-color: transparent; }
+}
+
+@keyframes lily-drift {
+  0%, 100% { margin-top: 0; }
+  50% { margin-top: -12px; }
+}
+
+@keyframes name-gradient {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+@keyframes photo-bloom {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.035) rotate(1deg); }
+}
+
+@keyframes background-bloom {
+  0%, 100% { transform: scale(1); opacity: 0.24; }
+  50% { transform: scale(1.035); opacity: 0.3; }
+}
+
+@keyframes background-bloom-left {
+  0%, 100% { transform: scaleX(-1) scale(1); opacity: 0.11; }
+  50% { transform: scaleX(-1) scale(1.04); opacity: 0.16; }
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .about-grid,
@@ -616,6 +880,21 @@ select {
 }
 
 @media (max-width: 700px) {
+  .page-shell::before {
+    width: 88vw;
+    height: 72vh;
+    opacity: 0.16;
+    background-size: auto 120%;
+  }
+
+  .page-shell::after {
+    width: 58vw;
+    height: 58vh;
+    top: 34vh;
+    opacity: 0.08;
+    background-size: auto 118%;
+  }
+
   .section-space {
     padding: 3.5rem 0;
   }
